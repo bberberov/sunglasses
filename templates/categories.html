@@ -1,0 +1,37 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% extends "page/blog.html" %}
+{% import "macro/link.html" as link with context %}
+
+{% block title %}{{ super() }} &ndash; {{ link.categories_title() }}{% endblock %}
+
+{% block head_links_canonical %}
+	{{ link.canonical_categories() }}
+{% endblock %}
+
+{% block content %}
+	<header>
+		<h1>{{- link.bookmark_categories() -}}</h1>
+	</header>
+
+	<div id="content">
+	{% if articles %}
+		<ul>
+		{% for category, articles in categories|sort %}
+			<li><a href="{{ SITEURL }}/{{ category.url }}">{{ category }}</a> ({{ articles|count }})</li>
+		{% endfor %}
+		</ul>
+	</div>
+	{% else %}
+		{% include "fragment/empty_blog.html" %}
+	{% endif %}
+{% endblock %}

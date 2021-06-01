@@ -1,0 +1,66 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019, 2020, 2021 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% extends "page/content.html" %}
+
+{% block html_lang %}{{ page.lang }}{% endblock %}
+
+{% import "macro/copyright.html" as copyright with context %}
+
+{% block head_copyright %}{{ copyright.comment(obj=page) }}{% endblock %}
+
+{% block title %}{{ super() }} &ndash; {{ page.title }}{% endblock %}
+
+{% block head_meta_keywords %}
+	{% if SITE_KEYWORDS or page.meta_keywords %}
+	<meta name="keywords" content="
+		{{- SITE_KEYWORDS|join(', ') -}}
+		{% if page.meta_keywords %}, {{ page.meta_keywords }}{% endif %}" />
+	{% endif %}
+{% endblock %}
+
+{% block head_links_canonical %}
+	<link rel="canonical" href="{{page.url}}" />
+{% endblock %}
+
+{% block head_links_hreflang %}
+	{% if page.translations %}
+	{% import 'macro/translations.html' as translations with context %}
+	{{- translations.link_hreflangs(page) -}}
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	{% if page.status == "hidden" %}
+	<p class="text-center">Private page</p>
+	{% endif %}
+	<header>
+		{% import "macro/link.html" as link with context %}
+		<h1>
+			{{- link.bookmark(page) -}}
+		</h1>
+	</header>
+
+	<div id="content">
+		{{ page.content }}
+	</div>
+
+	<footer>
+	{% if page.translations %}
+		{% import "macro/translations.html" as translations with context %}
+		<div>Available in: {{ translations.list(page) }}</div>
+	{% endif %}
+	{% import "macro/date.html" as date with context %}
+	{{- date.timestamp(page) }}
+	</footer>
+{% endblock %}
+
+{% block footer_copyright %}{{ copyright.html(obj=page) }}{% endblock %}

@@ -1,0 +1,79 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% macro _format_feed_url(feed_url, obj) -%}
+	{% if obj -%}
+		{{ feed_url.format(slug=obj.slug) }}
+	{%- else -%}
+		{{ feed_url }}
+	{%- endif %}
+{% endmacro %}
+
+{% macro link(feed, feed_url, app, obj=None, prefix=None) %}
+	{% if feed %}
+<link rel="alternate"
+	{#- attr #}
+		{%- if app=='atom' -%}
+		{##} type="application/atom+xml"{##}
+		{%- elif app=='rss' -%}
+		{##} type="application/rss+xml" {##}
+		{%- endif %}
+	{#- attr #} title="
+		{%- if INDEX_TITLE %}
+			{{- SITENAME + " &ndash; " + INDEX_TITLE -}}
+		{% else %}
+			{{- SITENAME + " &ndash; Blog" -}}
+		{% endif %}
+		{% if prefix or obj %}
+			{{- " &ndash; " -}}
+			{%- if prefix %}{{ prefix }}{% endif %}
+			{%- if obj %}{{ obj.name }}{% endif %}
+		{% endif %}
+		{%- if app=='atom' %} Atom Feed"{% elif app=='rss' %} RSS Feed" {% endif %}
+	{#- attr #} href="
+		{{- FEED_DOMAIN }}/
+		{%- if feed_url -%}
+			{{ _format_feed_url(feed_url, obj) }}
+		{%- else -%}
+			{{ _format_feed_url(feed, obj) }}
+		{%- endif -%}
+		" />
+	{%- endif %}
+{% endmacro %}
+
+{% macro a(feed, feed_url, app, obj=None, prefix=None) %}
+	{% if feed %}
+<a
+	{#- attr #} title="
+		{%- if INDEX_TITLE %}
+			{{- INDEX_TITLE -}}
+		{% else %}
+			{{- "Blog" -}}
+		{% endif %}
+		{% if prefix or obj %}
+			{{- " &ndash; " -}}
+			{%- if prefix %}{{ prefix }}{% endif %}
+			{%- if obj %}{{ obj.name }}{% endif %}
+		{% endif %}
+		{%- if app=='atom' %} Atom Feed"{% elif app=='rss' %} RSS Feed" {% endif %}
+	{#- attr #} href="
+		{{- FEED_DOMAIN }}/
+		{%- if feed_url -%}
+			{{ _format_feed_url(feed_url, obj) }}
+		{%- else -%}
+			{{ _format_feed_url(feed, obj) }}
+		{%- endif -%}
+	">
+	{%- if prefix and obj %}{{ prefix }}{{ obj.name }} {% endif %}
+	{%- if app=='atom' %}Atom Feed{% elif app=='rss' %}RSS Feed{% endif -%}
+</a>
+	{%- endif %}
+{% endmacro %}

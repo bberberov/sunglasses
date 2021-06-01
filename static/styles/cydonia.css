@@ -1,0 +1,1045 @@
+/*
+ * cydonia v0.1.0+ | Baseline
+ * Copyright © 2014–2019 Boian Berberov
+ *
+ * Released under the terms of the
+ * European Union Public License version 1.2 only.
+ *
+ * License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+ *
+ * SPDX-License-Identifier: EUPL-1.2
+ */
+
+/*
+ * Based on HTML Living Standard — Last Updated 15 April 2019
+ * https://html.spec.whatwg.org/multipage/#toc-semantics
+ */
+
+/*** 4.1 The document element *************************************************/
+
+html	{
+	border: none;
+	display: block;
+	margin: 0em;
+	padding: 0em;
+}
+
+/*** 4.2 Document metadata ****************************************************/
+
+head,
+title,
+base,
+link,
+meta,
+style
+{	display: none;	}
+
+/*** 4.3 Sections *************************************************************/
+
+body,
+article, section, nav, aside,
+h1, h2, h3, h4, h5, h6,
+hgroup,
+header, footer,
+address
+{
+	border-style: none;
+	display: block;
+
+	letter-spacing: normal;
+	text-align: -moz-initial;
+	text-align: initial;
+	text-decoration: none;
+	text-indent: 0em;
+	text-transform: none;
+	white-space: normal;
+	word-spacing: normal;
+}
+
+/*== body ====================================================================*/
+
+body
+{
+	margin: 0em;
+	padding: 1em;
+
+	background-color: #fff;
+	border-color: #000;
+	color: #000;
+	fill: #000;
+
+	/*** Set font-size through cascading styles or browser default ***/
+	font: normal normal normal 1em/normal sans-serif;
+}
+
+/*== Remaining section elements ==============================================*/
+
+article, section, nav, aside,
+h1, h2, h3, h4, h5, h6,
+hgroup,
+header, footer,
+address
+{
+	background-color: transparent;
+	border-color: inherit;
+	color: inherit;
+	fill: inherit;
+}
+
+/*-- Elements other than Headings --------------------------------------------*/
+
+article, section, nav, aside,
+hgroup,
+header, footer,
+address
+{
+	margin: 0em;
+	padding: 0em;
+
+	font: inherit;
+}
+
+/*-- hr spacing --------------------------------------------------------------*/
+
+hr + article, hr + section, hr + nav, hr + aside,
+hr + hgroup,
+hr + header, hr + footer,
+hr + address
+{	margin-top: 0.875em;	}
+
+/*-- Headings ----------------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+	/*** margin for :first-child is cascaded ***/
+	/*** margin-top is cascaded ***/
+	margin-left:  0em;
+	margin-right: 0em;
+	/*** margin-bottom is cascaded ***/
+	padding: 0em;
+
+	font-family: inherit;
+	/*** font-size is cascaded ***/
+	/*** font-style is cascaded ***/
+	font-variant: small-caps;
+	/*** font-weight is cascaded ***/
+	line-height: 1;
+}
+
+h1, h2, h3, h4, h6
+{	font-style: normal;	}
+
+h1, h2, h3, h4
+{	font-weight: bold;	}
+h5, h6
+{	font-weight: normal;	}
+
+h1	{
+	font-size: 2.5em;
+	margin-bottom: 0.2em;
+}
+h2	{
+	font-size: 2.0em;
+	margin-bottom: 0.25em;
+}
+h3	{
+	font-size: 1.6em;
+	margin-bottom: 0.3125em;
+}
+h4	{
+	font-size: 1.25em;
+	margin-bottom: 0.4em;
+}
+
+h5	{
+	font-size: 1.1em;
+	font-style: italic;
+	margin-bottom: 0.4545em;
+}
+h6	{
+	font-size: 1.0em;
+	margin-bottom: 0.5em;
+}
+
+h1, hgroup > h1:first-child,
+h2, hgroup > h2:first-child,
+h3, hgroup > h3:first-child,
+h4, hgroup > h4:first-child,
+h5, hgroup > h5:first-child,
+h6, hgroup > h6:first-child
+{	margin-top: 1em;	}
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child,
+hgroup:first-child > h1:first-child,
+hgroup:first-child > h2:first-child,
+hgroup:first-child > h3:first-child,
+hgroup:first-child > h4:first-child,
+hgroup:first-child > h5:first-child,
+hgroup:first-child > h6:first-child
+{	margin-top: 0em;	}
+
+hgroup > h1:last-child,
+hgroup > h2:last-child,
+hgroup > h3:last-child,
+hgroup > h4:last-child,
+hgroup > h5:last-child,
+hgroup > h6:last-child,
+header > h1:last-child,
+header > h2:last-child,
+header > h3:last-child,
+header > h4:last-child,
+header > h5:last-child,
+header > h6:last-child,
+footer > h1:last-child,
+footer > h2:last-child,
+footer > h3:last-child,
+footer > h4:last-child,
+footer > h5:last-child,
+footer > h6:last-child
+{	margin-bottom: 0em;	}
+
+/*** 4.4 Grouping content *****************************************************/
+
+p,
+hr,
+pre,
+blockquote,
+ol, ul,
+menu,
+li,
+dl,
+dt, dd,
+figure,
+figcaption,
+main, div
+{
+	border-style: none;
+
+	background-color: transparent;
+	border-color: inherit;
+	color: inherit;
+	fill: inherit;
+
+	/*** font properties overridden by cascades ***/
+	font: inherit;
+}
+
+pre,
+blockquote,
+ol, ul,
+menu,
+figure,
+figcaption
+{
+	letter-spacing: normal;
+	text-align: -moz-initial;
+	text-align: initial;
+	text-decoration: none;
+	text-indent: 0em;
+	text-transform: none;
+	white-space: normal;
+	word-spacing: normal;
+}
+
+p,
+li,
+dl,
+dt, dd,
+main, div
+{
+	letter-spacing: inherit;
+	text-align: inherit;
+	text-decoration: inherit;
+	text-indent: inherit;
+	text-transform: inherit;
+	white-space: inherit;
+	word-spacing: inherit;
+}
+
+/*-- display property --------------------------------------------------------*/
+
+p,
+hr,
+pre,
+blockquote,
+ol, ul,
+menu,
+dl,
+figure,
+figcaption,
+main, div
+{	display: block;	}
+
+li,
+dt, dd
+{	display: list-item;	}
+
+/*-- Minimum margins ---------------------------------------------------------*/
+
+p,
+pre,
+blockquote,
+ol, ul,
+dl
+{	margin: 0.5em 0em;	}
+
+main, div
+{	margin: 0em;	}
+
+/*== p, hr, pre, blockquote ==================================================*/
+
+p,
+hr,
+pre
+{	padding: 0em;	}
+
+p:first-child,
+pre:first-child
+{	margin-top: 0em;	}
+p:last-child,
+pre:last-child
+{	margin-bottom: 0em;	}
+
+hr	{
+	/* TODO: Review normalize.css for fixups on borders */
+	border: 0.125em solid currentColor;
+	border-radius: 0.125em;
+	height: 0em;
+	/*** See additional "hr spacing" sections ***/
+	margin: 0.875em 2ex;
+}
+
+pre	{
+	/* TODO: Review normalize.css for fixups */
+	font-family: monospace;
+	white-space: pre;
+}
+
+blockquote	{
+	border-left: 1ex solid #ccc;
+	padding: 0em 0em 0em 1ex;
+
+	font-style: italic;
+}
+
+/*== Lists ===================================================================*/
+
+ol, ul,
+dl
+{	padding: 0em 0em 0em 4ex;	}
+
+menu	{
+	margin: 1em;
+	padding: 0em;
+}
+
+ol:first-child, ul:first-child,
+dl:first-child,
+menu:first-child
+{	margin-top: 0em;	}
+
+ol:last-child, ul:last-child,
+dl:last-child,
+menu:last-child
+{	margin-bottom: 0em;	}
+
+menu menu	{
+	margin: 0em;
+	padding: 0em 0em 0em 2ex;
+}
+
+/*== List items ==============================================================*/
+
+li,
+dt, dd
+{
+	margin: 0em;
+	padding: 0em;
+}
+
+/*-- li ----------------------------------------------------------------------*/
+
+ol   > li	{	list-style: decimal outside;	}
+ul   > li	{	list-style:  square outside;	}
+menu > li	{	list-style:    none inside ;	}
+
+li > ol:first-child,
+li > ul:first-child
+{	margin-top:    0em;	}
+li > ol:last-child,
+li > ul:last-child
+{	margin-bottom: 0em;	}
+li > ol:only-of-type,
+li > ul:only-of-type
+{
+	margin-top:    0em;
+	margin-bottom: 0em;
+}
+
+/*-- dt and dd ---------------------------------------------------------------*/
+
+dt, dd	{	list-style: none inside ;	}
+
+dt	{	font-weight: bold;	}
+dd	{	margin-left: 4ex;	}
+
+/*== Figures =================================================================*/
+
+figure,
+figcaption
+{	padding: 0em;	}
+
+figure	{	margin: 1em auto;	}
+
+figcaption	{	margin: 0em;	}
+figcaption:first-child	{	margin-bottom: 0.5em;	}
+figcaption:last-child 	{	margin-top:    0.5em;	}
+
+/*== Spacing =================================================================*/
+
+/*-- Heading spacing ---------------------------------------------------------*/
+
+h1 +   p, h2 +   p, h3 +   p, h4 +   p, h5 +   p, h6 +   p,
+h1 + pre, h2 + pre, h3 + pre, h4 + pre, h5 + pre, h6 + pre,
+h1 +  ol, h2 +  ol, h3 +  ol, h4 +  ol, h5 +  ol, h6 +  ol,
+h1 +  ul, h2 +  ul, h3 +  ul, h4 +  ul, h5 +  ul, h6 +  ul,
+h1 +  dl, h2 +  dl, h3 +  dl, h4 +  dl, h5 +  dl, h6 +  dl
+{	margin-top: 0.5em;	}
+
+p + hgroup,
+pre + hgroup,
+blockquote + hgroup,
+ol + hgroup,
+ul + hgroup,
+dl + hgroup
+{	margin-top: -0.5em;	}
+
+/*-- hr spacing --------------------------------------------------------------*/
+
+hr + p,
+hr + pre,
+hr + blockquote,
+hr + ol, hr + ul,
+hr + dl,
+hr + menu,
+hr + figure,
+hr + main, hr + div
+{	margin-top: 0.875em;	}
+
+/*-- p and pre spacing -------------------------------------------------------*/
+
+p + p,
+p + pre,
+pre + p,
+pre + pre
+{	margin-top: 1em;	}
+
+/*-- blockquote spacing ------------------------------------------------------*/
+
+h1 + blockquote, h2 + blockquote, h3 + blockquote,
+h4 + blockquote, h5 + blockquote, h6 + blockquote,
+p + blockquote,
+pre + blockquote,
+ol + blockquote,
+ul + blockquote,
+dl + blockquote,
+blockquote + p,
+blockquote + pre,
+blockquote + ol,
+blockquote + ul,
+blockquote + dl
+{	margin-top: 1em;	}
+
+/*-- lists spacing -----------------------------------------------------------*/
+
+ol + ol,
+ol + ul,
+ol + dl,
+ul + ol,
+ul + ul,
+ul + dl,
+dl + ol,
+dl + ul,
+dl + dl
+{	margin-top: 1em;	}
+
+li > p:first-child:last-of-type
+{	margin-bottom: 0em;	}
+
+/*** 4.5 Text-level semantics *************************************************/
+
+a,
+em, strong,
+small,
+s,
+cite,
+q,
+abbr,
+code, var, samp, kbd,
+sub, sup,
+i, b, u,
+mark
+{
+	border-style: none;
+	display: inline;
+
+	background-color: transparent;
+	border-color: inherit;
+	color: inherit;
+	fill: inherit;
+
+	font: inherit;
+	letter-spacing: inherit;
+	text-align: inherit;
+	text-decoration: inherit;
+	text-indent: inherit;
+	text-transform: inherit;
+	white-space: inherit;
+	word-spacing: inherit;
+}
+
+/*
+dfn	{}
+ruby	{}
+rt	{}
+rp	{}
+data	{}
+time	{}
+bdi	{}
+bdo	{}
+span	{}
+br	{}
+wbr	{}
+*/
+
+/*----------------------------------------------------------------------------*/
+
+/*** The a element is in section 4.6 ***/
+
+em	{
+	font-style: italic;
+	text-decoration: underline;
+}
+
+strong	{
+	font-variant: small-caps;
+	font-weight: bold;
+}
+
+small	{	font-size: 0.625em;	}
+
+s	{	text-decoration: line-through;	}
+
+cite	{	font-style: italic;	}
+
+q	{	font-weight: lighter;	}
+
+abbr	{
+	text-decoration: underline;
+	text-decoration-style: dashed;
+}
+
+code, var, samp, kbd
+{	font-family: monospace;	}
+
+sub, sup
+{	font-size: 0.625em;	}
+sub	{	vertical-align: bottom;	}
+sup	{	vertical-align:    top;	}
+
+i	{	font-style: italic;	}
+
+b	{	font-weight: bold;	}
+
+u	{	text-decoration: underline;	}
+
+mark	{	background-color: rgba(255, 255, 102, 0.5);	}
+
+/*** 4.6 Links ****************************************************************/
+
+/*** All links, including a[name] ***/
+a	{	outline: none;	}
+
+/*
+ * TODO: Review order
+ *
+ * Keep Order !!!
+ *
+ * :link
+ * :visited
+ * :focus
+ * :hover
+ * :active
+ */
+
+a[href]:link   	{	color: #00c;	}
+a[href]:visited	{	color: #a00;	}
+a[href]:focus  	{	outline: thin dotted;	}
+a[href]:hover	{
+	color: #69f;
+
+	text-decoration: underline;
+}
+a[href]:active	{
+	color: #f11;
+
+	text-decoration: underline;
+}
+
+/*** 4.7 Edits ****************************************************************/
+
+ins, del
+{
+	border-style: none;
+	display: inline;
+
+	background-color: transparent;
+	border-color: inherit;
+	color: inherit;
+	fill: inherit;
+
+	font: inherit;
+	letter-spacing: inherit;
+	/* text-decoration is cascaded */
+	text-transform: inherit;
+	white-space: inherit;
+	word-spacing: inherit;
+}
+
+/*** TODO: Fix ***/
+ins	{	text-decoration: overline;	}
+
+/*** TODO: Fix ***/
+del	{
+	text-decoration: line-through;
+	font-weight: lighter;
+}
+
+/*** 4.8 Embedded content *****************************************************/
+
+/*
+picture	{}
+source	{}
+*/
+
+img	{
+	display: inline-block;
+
+	background-color: transparent;
+	border-color: inherit;
+	border-style: none;
+
+	vertical-align: bottom;
+}
+
+/*
+iframe	{}
+embed	{}
+object	{}
+param	{}
+video	{}
+audio	{}
+track	{}
+map	{}
+area	{}
+*/
+
+math,
+svg
+{
+	display: inline-block;
+
+	background-color: transparent;
+	border-color: inherit;
+	color: inherit;
+	fill: inherit;
+}
+math	{	vertical-align: middle;	}
+svg 	{	vertical-align: bottom;	}
+
+p img,
+figcaption img,
+caption img,
+p svg,
+figcaption svg,
+caption svg
+{	vertical-align: baseline;	}
+
+/* TODO: MathML fonts */
+
+/*** 4.9 Tabular data *********************************************************/
+
+table,
+caption,
+tbody,
+thead,
+tfoot,
+tr,
+td, th
+{
+	border-color: inherit;
+	color: inherit;
+	fill: inherit;
+}
+
+table,
+caption
+{
+	padding: 0em;
+
+	background-color: transparent;
+
+	letter-spacing: normal;
+	text-align: -moz-initial;
+	text-align: initial;
+	text-decoration: none;
+	text-indent: 0em;
+	text-transform: none;
+	white-space: normal;
+	word-spacing: normal;
+}
+
+table	{
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-style: solid;
+	border-width: 0.125em;
+	display: table;
+	margin: 1em;
+
+	font-family: inherit;
+	font-size: inherit;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: inherit;
+}
+
+caption	{
+	border-style: none;
+	display: table-caption;
+	margin: 0em 0em 0.5em 0em;
+
+	font: inherit;
+
+	caption-side: top;
+}
+
+colgroup	{	display: table-column-group;	}
+col     	{	display: table-column;	}
+
+tbody,
+thead,
+tfoot,
+tr,
+td, th
+{
+	font: inherit;
+	letter-spacing: inherit;
+	text-align: inherit;
+	text-decoration: inherit;
+	text-indent: inherit;
+	text-transform: inherit;
+	white-space: inherit;
+	word-spacing: inherit;
+}
+
+tbody,
+thead,
+tfoot
+{	background-color: transparent;	}
+tbody	{	display: table-row-group;	}
+thead	{	display: table-header-group;	}
+tfoot	{	display: table-footer-group;	}
+
+tr,
+td, th
+{	background-color: inherit;	}
+
+tr	{	display: table-row;	}
+
+td, th
+{
+	border-style: solid;
+	border-width: 0.125em;
+	display: table-cell;
+	padding: 0.5em 0.75em;
+	vertical-align: middle;
+}
+th	{	font-weight: bold;	}
+thead th,
+tfoot th
+{	text-align: center;	}
+tbody th
+{	text-align: inherit;	}
+
+/*== HTML 4.01 ===============================================================*/
+
+td[align='left'],
+th[align='left']
+{	text-align: left;	}
+
+td[align='center'],
+th[align='center']
+{	text-align: center;	}
+
+td[align='right'],
+th[align='right']
+{	text-align: right;	}
+
+td[align='justify'],
+th[align='justify']
+{	text-align: justify;	}
+
+/*** 4.10 Forms ***************************************************************/
+
+form,
+label,
+input,
+button,
+select,
+optgroup,
+option,
+textarea,
+output,
+progress,
+meter,
+fieldset,
+legend
+{	font: inherit;	}
+
+/*== form ====================================================================*/
+
+form	{
+	border-style: none;
+	display: block;
+	margin: 0em;
+	padding: 1em;
+
+	background-color: #ccc;
+	border-color: inherit;
+	color: inherit;
+	fill: inherit;
+}
+
+/*== Visible form elements ===================================================*/
+
+label,
+input,
+button,
+select,
+textarea,
+output,
+progress,
+meter
+{
+	margin: 0.25em;
+	vertical-align: middle;
+}
+
+/*-- label, input, and button ------------------------------------------------*/
+
+label,
+input,
+button
+{
+	display: inline;
+	height: 2em;
+}
+
+input[type=hidden]	{	display: none;	}
+
+input[type=text],
+input[type=search],
+input[type=tel],
+input[type=url],
+input[type=email],
+input[type=password],
+input[type=date],
+input[type=month],
+input[type=week],
+input[type=time],
+input[type=datetime-local]
+{	padding: 0em 0.25ex;	}
+input[type=number]
+{	padding: 0em 0em 0em 0.25ex;	}
+
+/*
+input[type=range]	{}
+*/
+
+input[type=color]	{
+	min-width: 5em;
+	padding: 0.125em;
+
+	cursor: pointer;
+}
+
+input[type=checkbox],
+input[type=radio]
+{
+	height: 1.2em;
+	width: 1.2em;
+}
+
+input[type=file]	{
+	border: 1px inset;
+	padding: 1px;
+}
+
+/*
+ * input "buttons" and button tags
+ */
+input[type=submit],
+input[type=image],
+input[type=reset],
+input[type=button],
+button
+{	cursor: pointer;	}
+
+input[type=submit],
+input[type=reset],
+input[type=button],
+button
+{	min-width: 5em;	}
+
+input[type=submit],
+button[type=submit]
+{	font-weight: bold;	}
+
+input[type=reset],
+button[type=reset]
+{	font-weight: lighter;	}
+
+/*-- select, datalist, optgroup, and option ----------------------------------*/
+
+select	{	display: inline;	}
+
+datalist	{	display: none;	}
+
+optgroup,
+option
+{	display: block;	}
+
+optgroup	{	font-weight: bold;	}
+
+option	{	font-weight: normal;	}
+
+optgroup > option	{	padding-left: 4ex;	}
+
+/*-- textarea and output------------------------------------------------------*/
+
+textarea,
+output
+{
+	display: block;
+	padding: 0.25em;
+}
+
+textarea	{	overflow: auto;	}
+
+output	{	border: 0.0625em inset;	}
+
+/*-- progress and meter ------------------------------------------------------*/
+
+progress,
+meter
+{
+	display: inline;
+	/* TODO: find optimal height */
+	height: 1.2em;
+	min-width: 10em;
+	vertical-align: middle;
+}
+
+/*-- fieldset and legend -----------------------------------------------------*/
+
+fieldset	{
+	display: inline-block;
+	margin: 0.25em;
+	padding: 0.25em;
+	vertical-align: top;
+}
+
+legend	{
+	display: inline;
+	margin: 0em 1ex;
+	padding: 0em 0.5ex;
+}
+
+/*** 4.11 Interactive elements ************************************************/
+
+details,
+summary
+{	display: block;	}
+
+dialog	{	display: none;	}
+
+/*== details and summary =====================================================*/
+
+details	{
+	border:	0.125em solid;
+	margin: 1em 0em;
+	padding: 0.0em 0.5em 0.0em 0.5em;
+}
+details[open]	{
+	padding: 0.0em 0.5em 0.5em 0.5em;
+}
+
+summary	{
+	background-color: #ccc;
+	padding: 0.25em 0.5em 0.25em 0.5em;
+}
+summary::before	{
+	float: right;
+	margin: 0em 0em 0.25em 0.25em;
+
+	cursor: pointer;
+}
+
+/*-- details and summary interaction -----------------------------------------*/
+
+details       > summary	{	margin: 0.0em -0.5em 0.0em -0.5em;	}
+details[open] > summary	{	margin: 0.0em -0.5em 0.5em -0.5em;	}
+
+details       > summary::before	{	content: "\2795";	}
+details[open] > summary::before	{	content: "\2796";	}
+
+/*== dialog ==================================================================*/
+
+@media screen	{
+	dialog[open]	{
+		bottom: 10%;
+		display: block;
+		left: 10%;
+		max-height: 80%;
+		max-width: 80%;
+		overflow: auto;
+		position: fixed;
+		right: 10%;
+		top: 10%;
+	}
+}
+
+@media print	{
+	dialog[open]	{
+		display: block;
+		margin: 1em auto;
+	}
+}
+
+/*** 4.12 Scripting ***********************************************************/
+
+script,
+template
+{	display: none;	}
+
+/*
+noscript
+slot
+*/

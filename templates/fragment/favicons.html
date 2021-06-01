@@ -1,0 +1,27 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% if SITE_FAVICON_ICO %}
+	<link rel="icon" type="image/x-icon" href="{{ SITEURL }}/favicon.ico" />
+{% endif %}
+{% if SITE_FAVICONS_PNG %}
+	{% for png_icon in SITE_FAVICONS_PNG|sort %}
+	<link rel="icon" type="image/png" sizes="{{ png_icon[0] }}x{{ png_icon[0] }}" href="{{ SITEURL }}/{{ png_icon[1] }}" />
+	{% endfor %}
+{% endif %}
+{% if SITE_FAVICON_SVG %}
+	<link rel="icon" type="image/svg+xml" href="{{ SITEURL }}/{{ SITE_FAVICON_SVG }}" />
+{% endif %}
+{% if SITE_APPLE_TOUCH_ICONS %}
+	{% for png_icon in SITE_APPLE_TOUCH_ICONS|sort(reverse=True) %}
+	<link rel="apple-touch-icon-precomposed" type="image/png" sizes="{{ png_icon[0] }}x{{ png_icon[0] }}" href="{{ SITEURL }}/{{ png_icon[1] }}" />
+	{% endfor %}
+{% endif %}

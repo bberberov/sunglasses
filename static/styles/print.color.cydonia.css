@@ -1,0 +1,70 @@
+/*
+ * cydonia v0.1.0+ | Color : Print
+ * Copyright © 2019 Boian Berberov
+ *
+ * Released under the terms of the
+ * European Union Public License version 1.2 only.
+ *
+ * License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+ *
+ * SPDX-License-Identifier: EUPL-1.2
+ */
+
+/*
+ * Based on HTML Living Standard — Last Updated 15 April 2019
+ * https://html.spec.whatwg.org/multipage/#toc-semantics
+ */
+
+/*** 4.3 Sections *************************************************************/
+
+body	{
+	background-color: #fff;
+	border-color: #000;
+	color: #000;
+	fill: #000;
+}
+
+/*** 4.4 Grouping content *****************************************************/
+
+blockquote	{	border-color: #bbb;	}
+
+/*** 4.6 Links ****************************************************************/
+
+a.fake,
+a[href]:link,
+a.fake:link
+{	color: #00c;	}
+
+a[href]:visited,
+a.fake:visited
+{	color: #a00;	}
+
+a[href]:hover,
+a.fake:hover
+{	color: #69f;	}
+
+a[href]:active,
+a.fake:active
+{	color: #f11;	}
+
+/******************************************************************************/
+
+.bg	{	background-color: #fff;	}
+
+.card	{
+	background-color: #eee;
+	border-color:     #eee;
+}
+.card.transparent	{
+	background-color: rgba(255, 255, 255, 0.866);
+	border-color:     transparent;
+}
+
+.fg	{
+	color: #000;
+	fill: #000;
+}
+.fg-disabled	{
+	color: #776;
+	fill: #776;
+}

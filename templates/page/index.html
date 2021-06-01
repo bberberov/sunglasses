@@ -1,0 +1,65 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% extends "page/blog.html" %}
+
+{% block content %}
+	{% block content_header %}
+	{% endblock content_header %}
+	<div id="content">
+	{% if articles %}
+		{% for article in articles_page.object_list %}
+		{% if loop.first %}
+	<ul>
+		{% endif %}
+	<li>
+	<article>
+			{% import 'macro/date.html' as date with context %}
+	<footer>
+		<span class="published">{{ date.published(article) }}</span>
+			{% if not category %}
+		<span>in <a href="{{ SITEURL }}/{{ article.category.url }}">
+				{{- article.category | escape -}}
+		</a></span>
+			{% endif %}
+	</footer>
+
+	<header>
+		<h2>
+			{% import 'macro/link.html' as link with context %}
+			{{- link.bookmark_a(article) -}}
+		</h2>
+	</header>
+			{% if article.modified %}
+
+	<footer class="modified">
+		<span class="updated">Updated {{ date.modified(article) }}</span>
+	</footer>
+			{% endif %}
+
+	<div>
+		{{ article.summary }}
+		<a class="readmore" href="{{ SITEURL }}/{{ article.url }}">read more</a>
+	</div>
+	</article>
+	</li>
+		{% if loop.last %}
+	</ul>
+		{% endif %}
+		{% endfor %}
+	</div>
+		{% if articles_page.has_other_pages() %}
+			{% include 'fragment/pagination.html' %}
+		{% endif %}
+	{% else %}
+		{% include 'fragment/empty_blog.html' %}
+	{% endif %}
+{% endblock content %}

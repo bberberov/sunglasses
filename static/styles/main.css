@@ -1,0 +1,313 @@
+/*
+ * sunglasses v0.1.0
+ * Copyright © 2019, 2020, 2021 Boian Berberov
+ *
+ * Released under the terms of the
+ * European Union Public License version 1.2 only.
+ *
+ * License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+ *
+ * SPDX-License-Identifier: EUPL-1.2
+ */
+
+#content	{
+	margin: 1em 0em;
+}
+
+@media print
+{
+	#header,
+	#footer
+	{	display: none;	}
+}
+
+@media screen
+{
+	html,
+	body,
+	#scroll-box,
+	#page,
+	#error,
+	.card
+	{
+		-moz-box-sizing:    border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing:         border-box;
+	}
+
+	html,
+	body,
+	#scroll-box
+	{
+		height: 100%;
+		width: 100%;
+		padding: 0em;
+	}
+
+	#scroll-box	{	overflow-y: auto;	}
+
+	#page,
+	#error
+	{	margin: 0em auto;	}
+
+	#error	{
+		max-width: 62ex;
+		display: table;
+		height: 100%;
+	}
+
+	.card	{	border-style: solid;	}
+
+	#error > #vertical-middle	{
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	#error > main	{	width: 100%;	}
+
+	#header menu,
+	#footer menu
+	{	margin: 0em;	}
+
+	@supports (display: flex)	{
+		#page	{
+			display: flex;
+		}
+		#page > main	{
+			display: flex;
+			flex-direction: column;
+		}
+		#page > main > header	{	flex: 0 0 0;	}
+		#content	{	flex: 1 0 0;	}
+		#page > main > footer	{	flex: 0 0 0;	}
+	}
+}
+
+/* Small */
+@media screen and (max-width: 21em)
+{
+	#page,
+	#error
+	{	padding: 0em;	}
+
+	.card	{
+		border-radius: 0em;
+		border-width: 0.25em;
+	}
+}
+
+/* Normal */
+@media screen and (min-width: 21em)
+{
+	#page,
+	#error
+	{	padding: 0.5em;	}
+
+	.card	{
+		border-radius: 0.5em;
+		border-width: 0.5em;
+	}
+}
+
+@media screen and (min-width: 30em)
+{
+	.card	{	padding: 0em 0.5em;	}
+}
+
+/* One column */
+@media screen and (max-width: 54.5em)
+{
+	#page	{	max-width: 38em;	}
+
+	#header,
+	#page > main,
+	#footer
+	{	width: 100%;	}
+
+	#header     	{	margin:   0em 0em 0.5em 0em;	}
+	#page > main	{	margin:   0em 0em   0em 0em;	}
+	#footer     	{	margin: 0.5em 0em   0em 0em;	}
+
+	/* Horizontal navigation menu */
+	#header menu > li,
+	#footer menu > li
+	{
+		display: inline-block;
+		width: auto;
+		margin-right: 1ex;
+	}
+	#header menu > li:last-child,
+	#footer menu > li:last-child
+	{
+		margin-right: 0em;
+	}
+	#header menu > li.category,
+	#footer menu > li.category
+	{
+		display: block;
+		margin-right: 0em;
+	}
+	#header menu > li.category > div,
+	#footer menu > li.category > div
+	{	display: inline;	}
+	#header menu > li.category > div:after,
+	#footer menu > li.category > div:after
+	{	content: ":";	}
+
+	#header menu > li.category > menu,
+	#footer menu > li.category > menu
+	{	display: inline-block;	}
+}
+
+/* Two columns */
+@media screen and (min-width: 54.5em)
+{
+	#page {
+		width: 53.5em;
+		max-width: 53.5em;
+	}
+
+	#header {
+		width: 13em;
+		top: 0.5em;
+		bottom: 0.5em;
+		position: fixed;
+	}
+	#page > main,
+	#footer
+	{	width: 38em;	}
+
+	#header     	{	margin:   0em 0em 0em 0.5em;	}
+	#page > main	{	margin:   0em 0em 0em  14em;	}
+	#footer     	{	margin: 0.5em 0em 0em  14em;	}
+
+	/* Vertical navigation menu */
+	#header menu > li,
+	#header menu > li.category,
+	#footer menu > li,
+	#footer menu > li.category
+	{
+		display: list-item;
+		margin-right: 0em;
+	}
+	#header menu > li.category > div,
+	#footer menu > li.category > div
+	{	display: block;	}
+	#header menu > li.category > div:after,
+	#footer menu > li.category > div:after
+	{	content: none;	}
+
+	#header menu > li.category > menu,
+	#footer menu > li.category > menu
+	{	display: block;	}
+}
+
+/* One or two columns */
+@media screen and (max-width: 69em)
+{
+	.card	{	display: block;	}
+
+	@supports (display: flex)	{
+		#page	{
+			flex-direction: column;
+			min-height: 100%;
+		}
+
+		#header     	{	flex: 0 0 0;	}
+		#page > main	{	flex: 1 0 0;	}
+		#footer     	{	flex: 0 0 0;	}
+	}
+}
+
+/* Three columns */
+@media screen and (min-width: 69em)
+{
+	#page	{
+		width: 67em;
+		max-width: 67em;
+		height: 100%;
+	}
+
+	.card	{	display: inline-block;	}
+
+	#header,
+	#page > main,
+	#footer
+	{
+		height: 100%;
+		overflow-y: auto;
+		position: static;
+	}
+
+	#header,
+	#footer
+	{	width: 13em;	}
+
+	#header     	{	margin: 0em 0.25em 0em  0.5em;	}
+	#page > main	{	margin: 0em 0.25em 0em 0.25em;	}
+	#footer     	{	margin: 0em    0em 0em 0.25em;	}
+}
+@media screen and (min-width: 73em)
+{
+	#page	{
+		width: 71em;
+		max-width: 71em;
+	}
+	#page > main	{
+		width: 42em;
+		padding: 0em 2em;
+	}
+}
+
+/*-------------------------------------------------------*/
+#page main > header,
+#page main > article > footer
+{
+	border-bottom: 0.0625em solid;
+	padding-bottom: 0.125em;
+}
+
+#page main > footer	{
+	border-top: 0.0625em solid;
+	padding-top: 0.125em;
+}
+
+#page main > footer,
+#page main > article > footer,
+#content article > header + footer
+{	font-size: 0.8em;	}
+
+#page main > article > footer,
+#content article > header + footer
+{	margin: 1em 0em;	}
+
+menu .active	{
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.bookmark       a[href][rel="bookmark"]	{	color: transparent;	}
+.bookmark:hover a[href][rel="bookmark"]	{	color: inherit;	}
+
+img.icon,
+svg.icon
+{	
+	height: 3em;
+	width: 3em;
+}
+
+img.char,
+svg.char
+{	
+	height: 1em;
+	width: 1em;
+	vertical-align: middle;
+}
+
+ul.plain,
+ol.plain
+{	padding: 0em;	}
+
+ul.plain > li,
+ol.plain > li
+{	list-style: none inside;	}

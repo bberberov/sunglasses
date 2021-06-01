@@ -1,0 +1,39 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019, 2020 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% macro published(obj) %}
+<time title="{{ obj.locale_date }}" datetime="
+	{%- if TIMESPEC %}
+		{{- obj.date.isoformat(timespec=TIMESPEC) -}}
+	{% else %}
+		{{- obj.date.isoformat() -}}
+	{% endif -%}
+">on {{ obj.locale_date }}</time>
+{%- endmacro %}
+
+{% macro modified(obj) %}
+<time title="{{ obj.locale_modified }}" datetime="
+	{%- if TIMESPEC %}
+		{{- obj.modified.isoformat(timespec=TIMESPEC) -}}
+	{% else %}
+		{{- obj.modified.isoformat() -}}
+	{% endif -%}
+">on {{ obj.locale_modified }}</time>
+{%- endmacro %}
+
+{% macro timestamp(obj) %}
+	{% if obj.modified %}
+		<div class="modified">Updated {{ modified(obj) }}</div>
+		<div class="published">Originally published {{ published(obj) }}</div>
+	{%- else %}
+		<div class="published">Published {{ published(obj) }}</div>
+	{%- endif %}
+{%- endmacro %}

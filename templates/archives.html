@@ -1,0 +1,52 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% extends "page/blog.html" %}
+{% import "macro/link.html" as link with context %}
+
+{% block title %}{{ super() }} &ndash; {{ link.archives_title() }}{% endblock %}
+
+{% block head_links_canonical %}
+	{{ link.canonical_archives() }}
+{% endblock %}
+
+{% block content %}
+	<header>
+		<h1>{{ link.bookmark_archives() }}</h1>
+	</header>
+
+	<div id="content">
+	{% if dates %}
+		<dl>
+		{% for article in dates %}
+			{% if loop.first %}
+			<h2>{{ article.date.year }}</h2>
+			<h3>{{ article.date.strftime('%B') }}</h3>
+			{% else %}
+				{% if article.date.year != loop.previtem.date.year %}
+			<h2>{{ article.date.year }}</h2>
+			<h3>{{ article.date.strftime('%B') }}</h3>
+				{% else %}
+					{% if article.date.month != loop.previtem.date.month %}
+			<h3>{{ article.date.strftime('%B') }}</h3>
+					{% endif %}
+				{% endif %}
+			{% endif %}
+
+			<dt>{{ article.locale_date }}</dt>
+			<dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
+		{% endfor %}
+		</dl>
+	{% else %}
+		{% include "fragment/empty_blog.html" %}
+	{% endif %}
+	</div>
+{% endblock %}

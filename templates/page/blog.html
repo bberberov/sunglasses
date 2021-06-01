@@ -1,0 +1,129 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% extends "page/content.html" %}
+
+{% block title %}
+	{{- super() -}}
+	{% if INDEX_TITLE %}
+		{{- " &ndash; " + INDEX_TITLE -}}
+	{% else %}
+		{{- " &ndash; Blog" -}}
+	{% endif %}
+{% endblock title %}
+
+{% block head_links %}
+	{{- super() -}}
+	{% block head_links_feeds %}
+	{% import 'macro/feed.html' as feed with context %}
+	{% if FEED_ATOM %}
+	{{ feed.link(FEED_ATOM, FEED_ATOM_URL, 'atom', prefix="Summary") }}
+	{% endif %}
+	{% if FEED_RSS %}
+	{{ feed.link(FEED_RSS, FEED_RSS_URL, 'rss', prefix="Summary") }}
+	{% endif %}
+	{% if FEED_ALL_ATOM %}
+	{{ feed.link(FEED_ALL_ATOM, FEED_ALL_ATOM_URL, 'atom', prefix="Full") }}
+	{% endif %}
+	{% if FEED_ALL_RSS %}
+	{{ feed.link(FEED_ALL_RSS, FEED_ALL_RSS_URL, 'rss', prefix="Full") }}
+	{% endif %}
+	{% endblock head_links_feeds %}
+{% endblock head_links %}
+
+{% block blog_nav %}
+	{% if articles %}
+		<hr />
+		<nav>
+			<menu>
+				{% import "macro/link.html" as link with context %}
+				<li{% if output_file == ARCHIVES_SAVE_AS %} class="active"{% endif %}><a href="
+					{{- SITEURL }}/{{ link.archives_url() }}">
+					{{- link.archives_menu_title() -}}
+				</a></li>
+				
+		{% if DISPLAY_CATEGORIES_ON_MENU != False or CATEGORIES_SAVE_AS %}
+				<li{% if DISPLAY_CATEGORIES_ON_MENU != False %} class="category"{% endif %}>
+			{% if CATEGORIES_SAVE_AS %}
+					<div{% if output_file == CATEGORIES_SAVE_AS %} class="active"{% endif %}><a href="
+						{{- SITEURL }}/{{ link.categories_url() }}">
+						{{- link.categories_title() -}}
+					</a></div>
+			{% else %}
+					<div>{{ link.categories_title() }}</div>
+			{% endif %}
+			{% if DISPLAY_CATEGORIES_ON_MENU != False %}
+					<menu>
+						{% for c, null in categories %}
+						<li{% if c == category %} class="active"{% endif %}><a href="
+							{{- SITEURL }}/{{ c.url }}">{{ c.name }}</a></li>
+						{% endfor %}
+					</menu>
+			{% endif %}
+				</li>
+		{% endif %}
+		{% if tags and (DISPLAY_TAGS_ON_MENU != False or TAGS_SAVE_AS) %}
+				<li{% if DISPLAY_TAGS_ON_MENU != False %} class="category"{% endif %}>
+			{% if TAGS_SAVE_AS %}
+					<div{% if output_file == TAGS_SAVE_AS %} class="active"{% endif %}><a href="
+						{{- SITEURL }}/{{ link.tags_url() }}">
+						{{- link.tags_title() -}}
+					</a></div>
+			{% else %}
+					<div>{{ link.tags_title() }}</div>
+			{% endif %}
+			{% if DISPLAY_TAGS_ON_MENU != False %}
+					<menu>
+						{% for t, null in tags %}
+						<li{% if t == tag %} class="active"{% endif %}><a href="
+							{{- SITEURL }}/{{ t.url }}">{{ t.name }}</a></li>
+						{% endfor %}
+					</menu>
+			{% endif %}
+				</li>
+		{% endif %}
+			</menu>
+		</nav>
+	{% endif %}
+{% endblock blog_nav %}
+
+{% block footer_feeds %}
+	{% import 'macro/feed.html' as feed with context %}
+	{% if FEED_ATOM or FEED_RSS or FEED_ALL_ATOM or FEED_ALL_RSS %}
+		<menu>
+			{% if FEED_ATOM or FEED_RSS %}
+			<li class="category"><div>Summary Feeds</div>
+				<menu>
+				{% if FEED_ATOM %}
+					<li>{{ feed.a(FEED_ATOM, FEED_ATOM_URL, 'atom') }}</li>
+				{% endif %}
+				{% if FEED_RSS %}
+					<li>{{ feed.a(FEED_RSS, FEED_RSS_URL, 'rss') }}</li>
+				{% endif %}
+				</menu>
+			</li>
+			{% endif %}
+			{% if FEED_ALL_ATOM and FEED_ALL_RSS %}
+			<li class="category"><div>Full Feeds</div>
+				<menu>
+				{% if FEED_ALL_ATOM %}
+					<li>{{ feed.a(FEED_ALL_ATOM, FEED_ALL_ATOM_URL, 'atom') }}</li>
+				{% endif %}
+				{% if FEED_ALL_RSS %}
+					<li>{{ feed.a(FEED_ALL_RSS, FEED_ALL_RSS_URL, 'rss') }}</li>
+				{% endif %}
+				</menu>
+			</li>
+			{% endif %}
+		</menu>
+		<hr />
+	{% endif %}
+{% endblock footer_feeds %}

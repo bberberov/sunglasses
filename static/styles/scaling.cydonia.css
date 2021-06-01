@@ -1,0 +1,33 @@
+/*
+ * cydonia v0.1.0+ | Scaling
+ * Copyright © 2014–2019 Boian Berberov
+ *
+ * Released under the terms of the
+ * European Union Public License version 1.2 only.
+ *
+ * License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+ *
+ * SPDX-License-Identifier: EUPL-1.2
+ */
+
+/*
+ * Based on HTML Living Standard — Last Updated 29 March 2019
+ * https://html.spec.whatwg.org/multipage/#toc-semantics
+ */
+
+/*** 4.3 Sections *************************************************************/
+
+@media print	{	body	{	font-size: 11pt;	}	}
+
+@media screen and (max-width:  17em)	{	body	{	font-size: 0.750em;	}	}
+@media screen and (min-width:  17em)	{	body	{	font-size: 0.875em;	}	}
+@media screen and (min-width:  21em)	{	body	{	font-size: 1.000em;	}	}
+@media screen and (min-width:  81em)	{	body	{	font-size: 1.125em;	}	}
+
+@media screen and (min-width: 125em)	{	body	{	font-size: 1.250em;	}	}
+@media screen and (min-width: 150em)	{	body	{	font-size: 1.500em;	}	}
+@media screen and (min-width: 200em)	{	body	{	font-size: 2.000em;	}	}
+@media screen and (min-width: 300em)	{	body	{	font-size: 3.000em;	}	}
+@media screen and (min-width: 450em)	{	body	{	font-size: 4.500em;	}	}
+
+@media screen and ( (max-width: 21em), (max-height: 25em) )	{	body	{	padding: 0em;	}	}

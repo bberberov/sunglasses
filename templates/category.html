@@ -1,0 +1,60 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% extends "page/index.html" %}
+
+{% set title_prefix="Category: " %}
+
+{% block title %}{{ super() }} &ndash; {{ title_prefix }}{{ category.name }}{% endblock %}
+
+{% block head_links_canonical %}
+	{% if DEFAULT_PAGINATION == False %}
+	<link rel="canonical" href="{{ CATEGORY_URL }}" />
+	{% endif %}
+{% endblock %}
+
+{% block head_links_feeds %}
+	{{- super() -}}
+	{% import "macro/feed.html" as feed with context %}
+	{% if CATEGORY_FEED_ATOM %}
+	{{ feed.link(CATEGORY_FEED_ATOM, CATEGORY_FEED_ATOM_URL, 'atom', obj=category, prefix=title_prefix) }}
+	{% endif %}
+	{% if CATEGORY_FEED_RSS %}
+	{{ feed.link(CATEGORY_FEED_RSS, CATEGORY_FEED_RSS_URL, 'rss', obj=category, prefix=title_prefix) }}
+	{% endif %}
+{% endblock %}
+
+{% block content_header %}
+	<header>
+		{% import "macro/link.html" as link with context %}
+		<h1>{{- link.bookmark2( "Category: " + category.name, output_file ) -}}</h1>
+	</header>
+{% endblock %}
+
+{% block footer_feeds %}
+	{{- super() -}}
+	{% import "macro/feed.html" as feed with context %}
+	{% if CATEGORY_FEED_ATOM or CATEGORY_FEED_RSS %}
+		<menu>
+			<li class="category"><div>{{ title_prefix }}{{ category.name}} Feeds</div>
+				<menu>
+				{% if CATEGORY_FEED_ATOM %}
+					<li>{{ feed.a(CATEGORY_FEED_ATOM, CATEGORY_FEED_ATOM_URL, 'atom', obj=category) }}</li>
+				{% endif %}
+				{% if CATEGORY_FEED_RSS %}
+					<li>{{ feed.a(CATEGORY_FEED_RSS, CATEGORY_FEED_RSS_URL, 'rss', obj=category) }}</li>
+				{% endif %}
+				</menu>
+			</li>
+		</menu>
+		<hr />
+	{% endif %}
+{% endblock %}

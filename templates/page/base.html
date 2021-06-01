@@ -1,0 +1,61 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019, 2020, 2021 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
+<head>
+	<meta charset="utf-8" />
+	{% block head_copyright %}
+	{% endblock head_copyright %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0" />
+	{% if META_GENERATOR %}
+	<meta name="generator" content="{{META_GENERATOR}}" />
+	{% endif %}
+	<title>{% block title %}{{ SITENAME }}{%endblock%}</title>
+	{% block head %}
+	{% block head_meta %}
+		{% block head_meta_keywords %}
+		{% endblock head_meta_keywords %}
+	{% endblock head_meta %}
+	{% block head_links %}
+		{% block head_links_canonical %}
+		{% endblock head_links_canonical %}
+		{% block head_links_hreflang %}
+		{% endblock head_links_hreflang %}
+		{% include 'fragment/favicons.html' %}
+	{% endblock head_links %}
+	{% block head_stylesheets %}
+	<link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/styles/cydonia.css" />
+	<link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/styles/classes.cydonia.css" />
+	<link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/styles/scaling.cydonia.css" />
+	<link rel="stylesheet" media="print" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/styles/print.color.cydonia.css" />
+	<link rel="stylesheet" media="screen" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/styles/dark.color.cydonia.css" />
+	<link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/styles/{{ CSS_FILE }}" />
+	{% endblock head_stylesheets %}
+	{% block head_style %}
+	{% if SITE_BG_COLOR or SITE_BG_IMAGE %}
+	<style media='screen'>
+		body {
+		{% if SITE_BG_COLOR %}
+			background-color: {{ SITE_BG_COLOR }};
+		{% endif %}
+		{% if SITE_BG_IMAGE %}
+			background-image: url('{{ SITEURL }}/{{ SITE_BG_IMAGE }}');
+		{% endif %}
+		}
+	</style>
+	{% endif %}
+	{% endblock head_style %}
+	{% endblock head %}
+</head>
+
+<body class='{% if SITE_BG_POSITION %}{{SITE_BG_POSITION}}{% else %}maxspect{%endif%}'>{% block body %}{% endblock body %}</body>
+</html>

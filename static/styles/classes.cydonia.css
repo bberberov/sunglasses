@@ -1,0 +1,127 @@
+/*
+ * cydonia v0.1.0+ | Classes
+ * Copyright © 2014–2021 Boian Berberov
+ *
+ * Released under the terms of the
+ * European Union Public License version 1.2 only.
+ *
+ * License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+ *
+ * SPDX-License-Identifier: EUPL-1.2
+ */
+
+/*== Backgrounds =============================================================*/
+
+.maxspect,
+.maxspect-LT, .maxspect-CT, .maxspect-RT,
+.maxspect-LM, .maxspect-CM, .maxspect-RM,
+.maxspect-LB, .maxspect-CB, .maxspect-RB
+{
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.maxspect-LT	{	background-position:   0%   0%;	}
+.maxspect-CT	{	background-position:  50%   0%;	}
+.maxspect-RT	{	background-position: 100%   0%;	}
+
+.maxspect-LM	{	background-position:   0%  50%;	}
+.maxspect,
+.maxspect-CM	{	background-position:  50%  50%;	}
+.maxspect-RM	{	background-position: 100%  50%;	}
+
+.maxspect-LB	{	background-position:   0% 100%;	}
+.maxspect-CB	{	background-position:  50% 100%;	}
+.maxspect-RB	{	background-position: 100% 100%;	}
+
+/*----------------------------------------------------------------------------*/
+
+.sidebars,
+.stretched
+{
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.sidebars	{	background-size: contain;	}
+.stretched	{	background-size: 100% 100%;	}
+
+/*== Alignment ===============================================================*/
+
+/*-- Block -------------------------------------------------------------------*/
+
+.block,
+.block-left,
+.block-center,
+.block-right
+{	display: block;	}
+
+.block-left  	{	margin-right: auto;	}
+.block-center	{
+             		margin-left:  auto;
+             		margin-right: auto;
+}
+.block-right 	{	margin-left:  auto;	}
+
+/*-- Inline-Block ------------------------------------------------------------*/
+
+.iblock,
+.iblock-top,
+.iblock-middle,
+.iblock-bottom
+{	display: inline-block;	}
+
+.iblock-top   	{	vertical-align:    top;	}
+.iblock-middle	{	vertical-align: middle;	}
+.iblock-bottom	{	vertical-align: bottom;	}
+
+/*-- Text --------------------------------------------------------------------*/
+
+.text-left   {	text-align:   left;	}
+.text-center {	text-align: center;	}
+.text-left   {	text-align:  right;	}
+
+/*-- Cursor ------------------------------------------------------------------*/
+
+.cursor-default	{	cursor: default;	}
+.cursor-help   	{	cursor:    help;	}
+.cursor-pointer	{	cursor: pointer;	}
+.cursor-text   	{	cursor:    text;	}
+
+/*== Element-specific ========================================================*/
+
+img.in-text,
+svg.in-text
+{
+	padding: 0.25em;
+	vertical-align: middle;
+}
+
+blockquote > .attribution	{	font-style: normal;	}
+blockquote > .attribution:last-child	{
+	margin-bottom: 1em;
+	padding: 0em 0em 0em 4ex;
+}
+blockquote > .attribution:last-child:before	{	content: "\2014\20";	}
+
+/*== Support for media types =================================================*/
+
+@media print	{
+	.media-no-print,
+	.media-screen,
+	.media-tty
+	{	display: none;	}
+}
+
+@media screen	{
+	.media-print,
+	.media-no-screen,
+	.media-tty
+	{	display: none;	}
+}
+
+@media tty	{
+	.media-print,
+	.media-screen,
+	.media-no-tty
+	{	display: none;	}
+}

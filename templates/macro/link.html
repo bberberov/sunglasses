@@ -1,0 +1,212 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% macro bookmark(obj) -%}
+<span class="bookmark">{{ obj.title }}&nbsp;<a rel="bookmark" title="Permalink to {{ obj.title | striptags }}" href="{{ SITEURL }}/{{ obj.url }}">#</a></span>
+{%- endmacro %}
+
+{% macro bookmark2(title, url) -%}
+<span class="bookmark">{{ title }}&nbsp;<a rel="bookmark" title="Permalink to {{ title | striptags }}" href="{{ SITEURL }}/{{ url }}">#</a></span>
+{%- endmacro %}
+
+{% macro bookmark_index() -%}
+<span class="bookmark">
+	{{- index_title() -}}
+	&nbsp;<a rel="bookmark" title="Permalink to {{ index_title() | striptags }}" href="
+	{{- SITEURL }}/{{ index_url() }}">#</a></span>
+{%- endmacro %}
+
+{% macro bookmark_archives() -%}
+<span class="bookmark">
+	{{- archives_title() -}}
+	&nbsp;<a rel="bookmark" title="Permalink to {{ archives_title() | striptags }}" href="
+	{{- SITEURL }}/{{ archives_url() }}">#</a></span>
+{%- endmacro %}
+
+{% macro bookmark_authors() -%}
+<span class="bookmark">
+	{{- authors_title() -}}
+	&nbsp;<a rel="bookmark" title="Permalink to {{ authors_title() | striptags }}" href="
+	{{- SITEURL }}/{{ authors_url() }}">#</a></span>
+{%- endmacro %}
+
+{% macro bookmark_categories() -%}
+<span class="bookmark">
+	{{- categories_title() -}}
+	&nbsp;<a rel="bookmark" title="Permalink to {{ categories_title() | striptags }}" href="
+	{{- SITEURL }}/{{ categories_url() }}">#</a></span>
+{%- endmacro %}
+
+{% macro bookmark_tags() -%}
+<span class="bookmark">
+	{{- tags_title() -}}
+	&nbsp;<a rel="bookmark" title="Permalink to {{ tags_title() | striptags }}" href="
+	{{- SITEURL }}/{{ tags_url() }}">#</a></span>
+{%- endmacro %}
+
+{% macro bookmark_a(obj) -%}
+<a rel="bookmark" href="{{ SITEURL }}/{{ obj.url }}">
+{{- obj.title -}}
+</a>
+{%- endmacro %}
+
+{#-----------------------------------#}
+
+{% macro canonical_index() -%}
+<link rel="canonical" href="{{ index_url() }}" />
+{%- endmacro %}
+
+{% macro canonical_archives() -%}
+<link rel="canonical" href="{{ archives_url() }}" />
+{%- endmacro %}
+
+{% macro canonical_authors() -%}
+<link rel="canonical" href="{{ authors_url() }}" />
+{%- endmacro %}
+
+{% macro canonical_categories() -%}
+<link rel="canonical" href="{{ categories_url() }}" />
+{%- endmacro %}
+
+{% macro canonical_tags() -%}
+<link rel="canonical" href="{{ tags_url() }}" />
+{%- endmacro %}
+
+
+{#-----------------------------------#}
+
+{% macro index_menu_title() -%}
+{% if INDEX_MENU_TITLE %}
+	{{- INDEX_MENU_TITLE -}}
+{% else %}
+	{{- index_title() -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro index_title() -%}
+{% if INDEX_TITLE %}
+	{{- INDEX_TITLE -}}
+{% else %}
+	{{- SITENAME -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro index_url() -%}
+{% if INDEX_URL %}
+	{{- INDEX_URL -}}
+{% else %}
+	{{- INDEX_SAVE_AS -}}
+{% endif %}
+{%- endmacro %}
+
+{#-----------------------------------#}
+
+{% macro archives_menu_title() -%}
+{% if ARCHIVES_MENU_TITLE %}
+	{{- ARCHIVES_MENU_TITLE -}}
+{% else %}
+	{{- archives_title() -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro archives_title() -%}
+{% if ARCHIVES_TITLE %}
+	{{- ARCHIVES_TITLE -}}
+{% else %}
+	{{- "Archives" -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro archives_url() -%}
+{% if ARCHIVES_URL %}
+	{{- ARCHIVES_URL -}}
+{% else %}
+	{{- ARCHIVES_SAVE_AS -}}
+{% endif %}
+{%- endmacro %}
+
+{#-----------------------------------#}
+
+{% macro authors_menu_title() -%}
+{% if AUTHORS_MENU_TITLE %}
+	{{- AUTHORS_MENU_TITLE -}}
+{% else %}
+	{{- authors_title() -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro authors_title() -%}
+{% if AUTHORS_TITLE %}
+	{{- AUTHORS_TITLE -}}
+{% else %}
+	{{- "Authors" -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro authors_url() -%}
+{% if AUTHORS_URL %}
+	{{- AUTHORS_URL -}}
+{% else %}
+	{{- AUTHORS_SAVE_AS -}}
+{% endif %}
+{%- endmacro %}
+
+{#-----------------------------------#}
+
+{% macro categories_menu_title() -%}
+{% if CATEGORIES_MENU_TITLE %}
+	{{- CATEGORIES_MENU_TITLE -}}
+{% else %}
+	{{- categories_title() -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro categories_title() -%}
+{% if CATEGORIES_TITLE %}
+	{{- CATEGORIES_TITLE -}}
+{% else %}
+	{{- "Categories" -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro categories_url() -%}
+{% if CATEGORIES_URL %}
+	{{- CATEGORIES_URL -}}
+{% else %}
+	{{- CATEGORIES_SAVE_AS -}}
+{% endif %}
+{%- endmacro %}
+
+{#-----------------------------------#}
+
+{% macro tags_menu_title() -%}
+{% if TAGS_MENU_TITLE %}
+	{{- TAGS_MENU_TITLE -}}
+{% else %}
+	{{- tags_title() -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro tags_title() -%}
+{% if TAGS_TITLE %}
+	{{- TAGS_TITLE -}}
+{% else %}
+	{{- "Tags" -}}
+{% endif %}
+{%- endmacro %}
+
+{% macro tags_url() -%}
+{% if TAGS_URL %}
+	{{- TAGS_URL -}}
+{% else %}
+	{{- TAGS_SAVE_AS -}}
+{% endif %}
+{%- endmacro %}

@@ -1,0 +1,28 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019, 2021 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% extends "page/base.html" %}
+
+{% block title %}{{ SITENAME }} &ndash; Error {{ page.title }}{%endblock%}</title>
+
+{% block head_meta %}
+	<meta name="robots" content="noindex, nofollow" />
+{% endblock %}
+
+{% block body %}<div id="scroll-box"><div id="error"><div id="vertical-middle">
+	<main class="card transparent">
+		<h1>Error {{page.title}}</h1>
+		{{ page.content }}
+		<hr />
+		<p><a href="{{ SITEURL }}/">Proceed to the Homepage</a></p>
+	</main>
+{% include 'fragment/analytics.html' %}
+</div></div></div>{% endblock %}

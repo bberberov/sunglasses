@@ -1,0 +1,167 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019, 2020 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% extends "page/blog.html" %}
+
+{% block html_lang %}{{ article.lang }}{% endblock %}
+
+{% import "macro/copyright.html" as copyright with context %}
+
+{% block head_copyright %}{{ copyright.comment(obj=article) }}{% endblock %}
+
+{% block title %}{{ super() }}: {{ article.title|striptags }}{% endblock %}
+
+{% block head_meta_keywords %}
+	{% if SITE_KEYWORDS or article.meta_keywords %}
+	<meta name="keywords" content="
+		{{- SITE_KEYWORDS|join(', ') -}}
+		{% if article.meta_keywords %}, {{ page.meta_keywords }}{% endif %}" />
+	{% endif %}
+{% endblock %}
+
+{% block head_links_canonical %}
+	<link rel="canonical" href="{{article.url}}" />
+{% endblock %}
+
+{% block head_links_feeds %}
+	{{- super() -}}
+	{% import "macro/feed.html" as feed with context %}
+	{% if AUTHOR_FEED_ATOM or AUTHOR_FEED_RSS %}
+		{% for author in article.authors %}
+			{% if AUTHOR_FEED_ATOM %}
+	{{ feed.link(AUTHOR_FEED_ATOM, AUTHOR_FEED_ATOM_URL, 'atom', obj=author, prefix="Author: ") }}
+			{% endif %}
+			{% if AUTHOR_FEED_RSS %}
+	{{ feed.link(AUTHOR_FEED_RSS, AUTHOR_FEED_ATOM_RSS, 'rss', obj=author, prefix="Author: ") }}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	{% if CATEGORY_FEED_ATOM %}
+	{{ feed.link(CATEGORY_FEED_ATOM, CATEGORY_FEED_ATOM_URL, 'atom', obj=category, prefix="Category: ") }}
+	{% endif %}
+	{% if CATEGORY_FEED_RSS %}
+	{{ feed.link(CATEGORY_FEED_RSS, CATEGORY_FEED_RSS_URL, 'rss', obj=category, prefix="Category: ") }}
+	{% endif %}
+	{% if TAG_FEED_ATOM or TAG_FEED_RSS %}
+		{% for tag in article.tags %}
+			{% if TAG_FEED_ATOM %}
+	{{ feed.link(TAG_FEED_ATOM, TAG_FEED_ATOM_URL, 'atom', obj=tag, prefix="Tag: ") }}
+			{% endif %}
+			{% if TAG_FEED_RSS %}
+	{{ feed.link(TAG_FEED_RSS, TAG_FEED_RSS_URL, 'rss', obj=tag, prefix="Tag: ") }}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endblock %}
+
+{% block head_links_hreflang %}
+	{% if article.translations %}
+	{% import "macro/translations.html" as translations with context %}
+	{{- translations.link_hreflangs(article) -}}
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<article>
+	<header>
+		{% import "macro/link.html" as link with context %}
+		<h1>
+			{{- link.bookmark(article) -}}
+		</h1>
+	</header>
+
+	<footer>
+		<address class="vcard">
+		{% for author in article.authors %}
+			{% if loop.first %}
+			by {% else -%}
+			, {% endif -%}
+			<a rel="author" class="fn url" href="{{ SITEURL }}/{{ author.url }}">
+				{{- author.name | escape -}}
+			</a>
+		{% endfor %}
+		</address>
+		<div>In <a href="{{ SITEURL }}/{{ article.category.url }}">
+			{{- article.category | escape -}}
+		</a></div>
+		{% import "macro/date.html" as date with context %}
+		{{- date.timestamp(article) }}
+		{% if article.tags %}
+		<div>Tags: {% for tag in article.tags -%}
+			<a rel="tag" href="{{ SITEURL }}/{{ tag.url }}">
+				{{- tag.name | escape -}}
+			</a>
+			{%- endfor %}
+		</div>
+		{% endif %}
+		{% if article.translations %}
+		{% import "macro/translations.html" as translations with context %}
+		<div>Available in: {{ translations.list(article) }}</div>
+		{% endif %}
+	</footer>
+
+	<div id="content">
+		{{ article.content }}
+	</div>
+	</article>
+{% endblock %}
+
+{% block footer_feeds %}
+	{{- super() -}}
+	{% import "macro/feed.html" as feed with context %}
+	{% if AUTHOR_FEED_ATOM or AUTHOR_FEED_RSS or CATEGORY_FEED_ATOM or CATEGORY_FEED_RSS %}
+		<menu>
+		{% if AUTHOR_FEED_ATOM or AUTHOR_FEED_RSS %}
+			{% for author in article.authors %}
+			<li class="category"><div>Author: {{ author.name}} Feeds</div>
+				<menu>
+				{% if AUTHOR_FEED_ATOM %}
+					<li>{{ feed.a(AUTHOR_FEED_ATOM, AUTHOR_FEED_ATOM_URL, 'atom', obj=author) }}</li>
+				{% endif %}
+				{% if AUTHOR_FEED_RSS %}
+					<li>{{ feed.a(AUTHOR_FEED_RSS, AUTHOR_FEED_RSS_URL, 'rss', obj=author) }}</li>
+				{% endif %}
+				</menu>
+			</li>
+			{% endfor %}
+		{% endif %}
+		{% if CATEGORY_FEED_ATOM or CATEGORY_FEED_RSS %}
+			<li class="category"><div>Category: {{ category.name}} Feeds</div>
+				<menu>
+				{% if CATEGORY_FEED_ATOM %}
+					<li>{{ feed.a(CATEGORY_FEED_ATOM, CATEGORY_FEED_ATOM_URL, 'atom', obj=category) }}</li>
+				{% endif %}
+				{% if CATEGORY_FEED_RSS %}
+					<li>{{ feed.a(CATEGORY_FEED_RSS, CATEGORY_FEED_RSS_URL, 'rss', obj=category) }}</li>
+				{% endif %}
+				</menu>
+			</li>
+		{% endif %}
+		{% if TAG_FEED_ATOM or TAG_FEED_RSS %}
+			{% for tag in article.tags %}
+			<li class="category"><div>Tag: {{ tag.name}} Feeds</div>
+				<menu>
+				{% if TAG_FEED_ATOM %}
+					<li>{{ feed.a(TAG_FEED_ATOM, TAG_FEED_ATOM_URL, 'atom', obj=tag) }}</li>
+				{% endif %}
+				{% if TAG_FEED_RSS %}
+					<li>{{ feed.a(TAG_FEED_RSS, TAG_FEED_ATOM_RSS, 'rss', obj=tag) }}</li>
+				{% endif %}
+				</menu>
+			</li>
+			{% endfor %}
+		{% endif %}
+		</menu>
+		<hr />
+	{% endif %}
+{% endblock %}
+
+{% block footer_copyright %}{{ copyright.html(obj=article) }}{% endblock %}

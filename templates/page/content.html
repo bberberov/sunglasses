@@ -1,0 +1,106 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019, 2020, 2021 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% extends "page/base.html" %}
+
+{% import "macro/copyright.html" as copyright with context %}
+
+{% block head_copyright %}{{ copyright.comment() }}{% endblock head_copyright %}
+
+{% block head_meta_keywords %}
+	{% if SITE_KEYWORDS %}
+	<meta name="keywords" content="{{ SITE_KEYWORDS|join(', ') }}" />
+	{% endif %}
+{% endblock %}
+
+{% block body %}<div id="scroll-box"><div id="page">
+	<header id="header" class="card{% if SITE_BG_IMAGE %} transparent{% endif %}">
+		<nav>
+			<menu>
+			{% import 'macro/link.html' as link with context %}
+			{% if 'index' is in(DIRECT_TEMPLATES) and INDEX_SAVE_AS == 'index.html'%}
+				<li{% if output_file == INDEX_SAVE_AS %} class="active"{% endif %}><a href="
+					{{- SITEURL }}/{{ link.index_url() }}">
+					{{- link.index_menu_title() -}}
+				</a></li>
+			{% endif %}
+			{##}
+			{% if DISPLAY_PAGES_ON_MENU %}
+				{% for pg in pages if pg.category is eq(DEFAULT_CATEGORY) %}
+				<li{% if pg == page %} class="active"{% endif %}><a href="
+					{{- SITEURL }}/{{ pg.url }}">
+					{%- if pg.menu_title %}{{ pg.menu_title }}{% else %}{{ pg.title }}{% endif -%}
+				</a></li>
+				{% endfor %}
+				{##}
+				{% for pg in draft_pages if pg.category is eq(DEFAULT_CATEGORY) and pg.in_default_lang %}
+				<li class="fg-disabled">
+					{%- if pg.menu_title %}{{ pg.menu_title }}{% else %}{{ pg.title }}{% endif -%}
+				</li>
+				{% endfor %}
+				{##}
+				{% for pg in pages if pg.category is ne(DEFAULT_CATEGORY) %}
+					{% if loop.changed(pg.category) %}
+						{% if not loop.first %}
+					</menu>
+				</li>
+						{% endif %}
+				<li class="category"><div>{{ pg.category }}</div>
+					<menu>
+					{% endif %}
+						<li{% if pg == page %} class="active"{% endif %}><a href="
+							{{- SITEURL }}/{{ pg.url }}">
+							{%- if pg.menu_title %}{{ pg.menu_title }}{% else %}{{ pg.title }}{% endif -%}
+						</a></li>
+					{% if loop.last %}
+					</menu>
+				</li>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+			{##}
+			{% if 'index' is in(DIRECT_TEMPLATES) and INDEX_SAVE_AS != 'index.html'%}
+				<li{% if output_file == INDEX_SAVE_AS %} class="active"{% endif %}><a href="
+					{{- SITEURL }}/{{ link.index_url() }}">
+					{{- link.index_menu_title() -}}
+				</a></li>
+			{% endif %}
+			</menu>
+		</nav>
+		{% block blog_nav %}
+		{% endblock blog_nav %}
+	</header><!--
+
+	--><hr class="media-tty" /><!--
+
+	--><main class="card{% if SITE_BG_IMAGE %} transparent{% endif %}">
+	{% block content %}
+	{% endblock %}
+	</main><!--
+
+	--><hr class="media-tty" /><!--
+
+	--><footer id="footer" class="card{% if SITE_BG_IMAGE %} transparent{% endif %}">
+		{% block footer_feeds %}
+		{% endblock footer_feeds %}
+		<p>
+		{% block footer_copyright %}{{ copyright.html() }}{% endblock footer_copyright %}
+		</p>
+		<p>
+			<span class="iblock">Powered by <a rel="external" href="https://getpelican.com/">Pelican</a>,</span>
+			<span class="iblock">written in <a rel="external" href="https://www.python.org">Python</a>,</span>
+			<span class="iblock">
+				using the <a rel="external" href="https://github.com/bberberov/sunglasses">sunglasses</a> theme.
+			</span>
+		</p>
+	</footer>
+{% include 'fragment/analytics.html' %}
+</div></div>{% endblock body %}

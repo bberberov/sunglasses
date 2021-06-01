@@ -1,0 +1,106 @@
+{#
+	sunglasses v0.1.0
+	Copyright © 2019, 2020 Boian Berberov
+
+	Released under the terms of the
+	European Union Public License version 1.2 only.
+
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+
+	SPDX-License-Identifier: EUPL-1.2
+#}
+{% set license = namespace(
+	text = namespace(
+		allrights="All Rights Reserved."
+	),
+	html = namespace(
+		allrights="All Rights Reserved."
+	)
+) %}
+
+{% macro _years(obj=None) %}
+	{%- if obj -%}
+		{{ obj.date.year }}
+			{%- if obj.modified and obj.modified.year != obj.date.year -%}
+				–{{ obj.modified.year }}
+			{%- endif %}
+	{%- else -%}
+		{{ BUILD_TIME.year }}
+	{%- endif -%}
+{% endmacro %}
+
+{% macro _notice_text(obj=None) %}
+	{%- if obj -%}
+		Copyright © {{ _years(obj) }} {{ obj.authors|join(', ') }}.
+	{%- else -%}
+		Copyright © {{ _years() }} {{ AUTHOR }}.
+	{%- endif -%}
+{% endmacro %}
+
+{% macro _notice_html(obj=None) %}
+			<span class="iblock">
+				{% if obj %}
+				<span class="iblock">Copyright © {{ _years(obj) }}</span>
+					{% if 1 < obj.authors|length() %}
+				<span class="iblock">
+					<span class="iblock">{{ obj.authors|join(',</span>\n\t\t<span class="iblock">') }}.</span>
+				</span>
+					{% else %}
+				<span class="iblock">{{ obj.author}}.</span>
+					{% endif %}
+				{% else %}
+				<span class="iblock">Copyright © {{ _years() }}</span>
+				<span class="iblock">{{ AUTHOR }}.</span>
+				{% endif %}
+			</span>
+{% endmacro %}
+
+{% macro text(obj=None) %}
+	{{ _notice_text(obj) }}
+	{% if obj %}
+		{% if license.text[obj.license] %}
+	{{ license.text[obj.license] -}}
+		{% elif obj.license_custom %}
+	{{ obj.license_custom -}}
+		{% else %}
+	{{ license.text.allrights -}}
+		{% endif %}
+	{% else %}
+		{% if SITE_LICENSE %}
+	{{ license.text[SITE_LICENSE] -}}
+		{% elif SITE_LICENSE_CUSTOM %}
+	{{ SITE_LICENSE_CUSTOM -}}
+		{% else %}
+	{{ license.text.allrights -}}
+		{% endif %}
+	{% endif %}
+{% endmacro %}
+
+{% macro comment(obj=None) %}
+	<!--
+{{ text(obj) }}
+	-->
+{% endmacro %}
+
+{% macro html(obj=None) %}
+			{{- _notice_html(obj) }}
+			<span class="iblock">
+				{%- if obj -%}
+					{%- if license.html[obj.license] -%}
+						{{ license.html[obj.license] }}
+					{%- elif obj.license_custom -%}
+						{{ obj.license_custom }}
+					{%- else -%}
+						{{ license.html.allrights }}
+					{%- endif -%}
+				{%- else -%}
+					{%- if SITE_LICENSE -%}
+						{{ license.html[SITE_LICENSE] }}
+					{%- elif SITE_LICENSE_CUSTOM %}
+						{{ SITE_LICENSE_CUSTOM }}
+					{%- else -%}
+						{{ license.html.allrights }}
+					{%- endif -%}
+				{%- endif -%}
+			</span>
+{% endmacro %}
